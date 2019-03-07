@@ -1,0 +1,5 @@
+<ng-container *ngIf="recipes.length > 0">
+  <ng-container *ngFor="let recipe of recipes">
+      <app-recipe [recipe]="recipe"></app-recipe>
+  </ng-container>
+</ng-container>

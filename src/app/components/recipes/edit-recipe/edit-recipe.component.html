@@ -1,0 +1,17 @@
+<div>
+  <mat-card *ngIf="editRecipeForm">
+    <form [formGroup]="editRecipeForm" class="edit-recipe-form">
+      <mat-form-field>
+        <input matInput type="text" placeholder="Title" [formControlName]="recipeProps.title" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Description" [formControlName]="recipeProps.description" />
+      </mat-form-field>
+      <div>
+        <button mat-raised-button color="primary" (click)="submit()" [disabled]="!editRecipeForm.valid">
+          Save
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
