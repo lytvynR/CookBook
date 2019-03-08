@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Recipe, recipeProps } from 'src/app/models/recipe';
 import { apiPathConstants } from 'src/app/shared/constants/api-path-constants';
 import { FormsControlGroup } from 'src/app/shared/forms/form-control-group';
+import { routeConstants } from 'src/app/routes/route-constants';
 
 @Component({
   selector: 'app-edit-recipe',
@@ -56,12 +57,20 @@ export class EditRecipeComponent extends BaseComponent implements OnInit {
     this.isNew ? this.createRecipe(recipe) : this.updateRecipe(recipe);
   }
 
+  goBack() {
+    this.back();
+  }
+
   private createRecipe(recipe: Recipe) {
-    this.apiClientService.post(apiPathConstants.recipes, recipe).subscribe();
+    this.apiClientService.post(apiPathConstants.recipes, recipe).subscribe(() => {
+      this.navigate(routeConstants.recipes);
+    });
   }
 
   private updateRecipe(recipe: Recipe) {
-    this.apiClientService.put(apiPathConstants.recipes, recipe).subscribe();
+    this.apiClientService.put(apiPathConstants.recipes, recipe).subscribe(() => {
+      this.navigate(routeConstants.recipes);
+    });
   }
 
   private createEditRecipeForm(recipe: Recipe) {

@@ -1,15 +1,14 @@
-export interface Recipe {
+export interface RecipeChange {
   id: string;
-  createdDate: string;
+  recipeId: string;
   modifiedDate: string;
   title: string;
   description: string;
 }
 
-
-export const recipeProps = {
+export const recipeChangeProps = {
   id: 'id',
-  createdDate: 'createdDate',
+  recipeId: 'recipeId',
   modifiedDate: 'modifiedDate',
   title: 'title',
   description: 'description'

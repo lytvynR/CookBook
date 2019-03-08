@@ -1,5 +1,15 @@
 .recipe-card {
   min-width: 300px;
-  padding: 10px;
+  min-height: 350px;
+  padding: 20px 10px;
   margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.recipe-card-content {
+  height: 200px;
+  max-width: 300px;
+  overflow: hidden;
 }

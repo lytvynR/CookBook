@@ -1,0 +1,11 @@
+.expansion-body {
+  display: flex;
+  justify-content: space-between;
+  &> div {
+    width: 49%;
+  }
+}
+
+.history-container {
+  margin: 0 10px;
+}
