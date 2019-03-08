@@ -2,5 +2,5 @@
   <button mat-button id="toggle-sidenav-button" (click)="toggleSidenav()">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>Recipe manager</span>
+  <a [routerLink]="[routeConstants.root]"><span>Recipe manager</span></a>
 </mat-toolbar>

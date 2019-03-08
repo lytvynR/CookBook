@@ -4,14 +4,17 @@ html {
 
 body {
   height: 100%;
-  font-family: "Roboto", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande",
-      sans-serif;
+  font-family: 'Roboto', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   padding: 0;
   margin: 0;
 }
 
 a {
   text-decoration: none;
+  color: black;
+  &:hover {
+    color: black;
+  }
 }
 
 .pointer {
@@ -21,14 +24,14 @@ a {
 .card-footer-with-buttons {
   display: flex;
   justify-content: flex-end;
-  &> button {
+  & > button {
     margin: 0 10px;
   }
 }
 
-
-@media(max-width: 599px){
-  .mat-toolbar-row, .mat-toolbar-single-row {
+@media (max-width: 599px) {
+  .mat-toolbar-row,
+  .mat-toolbar-single-row {
     height: 64px !important;
   }
 }

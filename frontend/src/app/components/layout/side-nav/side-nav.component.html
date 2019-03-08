@@ -1,8 +1,10 @@
 <mat-sidenav-container class="side-nav-container">
   <mat-sidenav class="side-nav" #sidenav opened="false" [mode]="'side'" [fixedInViewport]="false" fixedTopGap="64">
     <ul>
-      <li><a id="recipes-router-link" [routerLink]="getRouterLink(routeConstants.recipes)">Recipes</a></li>
-      <li><a id="add-recipe-router-link" [routerLink]="getRouterLink(routeConstants.editRecipe)">Add recipe</a></li>
+      <li><a id="recipes-router-link" [routerLink]="getRouterLink(routeConstants.recipes)" routerLinkActive="active-menu">Recipes</a></li>
+      <li>
+        <a id="add-recipe-router-link" [routerLink]="getRouterLink(routeConstants.editRecipe)" routerLinkActive="active-menu">Add recipe</a>
+      </li>
     </ul>
   </mat-sidenav>
   <mat-sidenav-content class="side-nav-content">

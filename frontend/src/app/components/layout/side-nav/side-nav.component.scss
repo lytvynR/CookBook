@@ -59,3 +59,7 @@ $side-nav-container-padding: 20px;
 .side-nav-container {
   height: 100%;
 }
+
+li > a.active-menu {
+  font-weight: bolder !important;
+}
