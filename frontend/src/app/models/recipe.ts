@@ -1,9 +1,12 @@
+import { RecipeVersion } from './recipe-version';
+
 export interface Recipe {
   id: string;
   createdDate: string;
   modifiedDate: string;
   title: string;
   description: string;
+  previousVersions: RecipeVersion[];
 }
 
 
@@ -12,5 +15,6 @@ export const recipeProps = {
   createdDate: 'createdDate',
   modifiedDate: 'modifiedDate',
   title: 'title',
-  description: 'description'
+  description: 'description',
+  previousVersions: 'previousVersions',
 };

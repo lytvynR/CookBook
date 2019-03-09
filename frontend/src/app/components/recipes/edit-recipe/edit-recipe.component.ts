@@ -20,6 +20,7 @@ export class EditRecipeComponent extends BaseComponent implements OnInit {
     modifiedDate: '',
     title: '',
     description: '',
+    previousVersions: []
   };
 
   recipeProps = recipeProps;
@@ -52,6 +53,7 @@ export class EditRecipeComponent extends BaseComponent implements OnInit {
       modifiedDate: this.editRecipeForm.value.modifiedDate,
       title: this.editRecipeForm.value.title,
       description: this.editRecipeForm.value.description,
+      previousVersions: this.recipe.previousVersions,
     };
 
     this.isNew ? this.createRecipe(recipe) : this.updateRecipe(recipe);

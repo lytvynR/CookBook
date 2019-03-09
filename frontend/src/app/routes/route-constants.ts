@@ -5,5 +5,5 @@ export const routeConstants = {
   recipes: 'recipes',
   recipeHistory: 'recipe-history',
   editRecipe: 'edit-recipe',
-  editRecipeWithId: 'edit-recipes/' + idPart,
+  editRecipeWithId: 'edit-recipe' + idPart,
 };
