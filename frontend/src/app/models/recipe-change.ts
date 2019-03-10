@@ -11,5 +11,5 @@ export const comparableRecipeChangeProps = {
   title: 'title',
   prevTitle: 'prevTitle',
   description: 'description',
-  prevDescription: 'prevDescription'
+  prevDescription: 'prevDescription',
 };

@@ -46,7 +46,7 @@ import {
     MatRadioModule,
     MatCheckboxModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
   ],
   exports: [
     MatSidenavModule,
@@ -73,7 +73,7 @@ import {
     MatRadioModule,
     MatCheckboxModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
   ],
 })
 export class MatModule {}

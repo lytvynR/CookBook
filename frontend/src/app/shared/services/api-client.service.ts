@@ -6,22 +6,22 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiClientService {
-
   constructor(private httpClient: HttpClient) {}
+  baseurl = 'http://localhost:13280/';
 
   get<T>(url: string): Observable<T> {
-    return this.httpClient.get<T>(url);
+    return this.httpClient.get<T>(this.baseurl + url);
   }
 
   post<T>(url: string, data: T): Observable<T> {
-    return this.httpClient.post<T>(url, data);
+    return this.httpClient.post<T>(this.baseurl + url, data);
   }
 
   put(url: string, data: object): Observable<void> {
-    return this.httpClient.put<void>(url, data);
+    return this.httpClient.put<void>(this.baseurl + url, data);
   }
 
   delete(url: string): Observable<void> {
-    return this.httpClient.delete<void>(url);
+    return this.httpClient.delete<void>(this.baseurl + url);
   }
 }

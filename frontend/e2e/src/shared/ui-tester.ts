@@ -3,7 +3,7 @@ import { browser, by, element, protractor } from 'protractor';
 export class UiTester {
   expectedConditions = protractor.ExpectedConditions;
 
-  navigateTo(route: string = browser.baseUrl) {
+  navigateTo(route: string = 'http://localhost:4200/') {
     browser.get(route);
     browser.wait(this.expectedConditions.urlContains(route));
   }

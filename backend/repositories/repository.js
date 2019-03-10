@@ -1,7 +1,7 @@
 function Repository() {}
 
 function getAll(callback) {
-  var query = this.model.find();
+  var query = this.model.find().sort({createdDate: -1});
   query.exec(callback);
 }
 

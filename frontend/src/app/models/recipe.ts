@@ -9,7 +9,6 @@ export interface Recipe {
   previousVersions: RecipeVersion[];
 }
 
-
 export const recipeProps = {
   id: 'id',
   createdDate: 'createdDate',

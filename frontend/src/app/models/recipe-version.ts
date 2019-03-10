@@ -7,8 +7,5 @@ export interface RecipeVersion {
 export const recipeVersionProps = {
   modifiedDate: 'modifiedDate',
   title: 'title',
-  description: 'description'
+  description: 'description',
 };
-
-
-

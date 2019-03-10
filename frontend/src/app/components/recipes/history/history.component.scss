@@ -1,7 +1,7 @@
 .expansion-body {
   display: flex;
   justify-content: space-between;
-  &> div {
+  & > div {
     width: 49%;
   }
 }

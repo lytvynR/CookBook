@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, Injector} from '@angular/core';
+import { Component, OnInit, Input, Injector } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base-component/base-component';
 import { Recipe } from 'src/app/models/recipe';
 import { routeConstants } from 'src/app/routes/route-constants';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe',
