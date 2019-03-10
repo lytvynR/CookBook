@@ -1,35 +1,33 @@
-<ng-container *ngIf="recipe">
-  <ng-container *ngIf="recipe.previousVersions.length > 0; else emptyHistory">
-    <ng-container *ngFor="let change of recipe.previousVersions">
-      <mat-accordion class="history-container">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title
-              ><b>{{ change.title }}</b></mat-panel-title
-            >
-            <mat-panel-description>{{ change.modifiedDate }}</mat-panel-description>
-          </mat-expansion-panel-header>
+<ng-container *ngIf="recipeChanges.length > 0; else emptyHistory">
+  <ng-container *ngFor="let change of recipeChanges">
+    <mat-accordion class="history-container">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title
+            ><b>{{ change.title }}</b></mat-panel-title
+          >
+          <mat-panel-description>{{ change.modifiedDate | date: 'MM/dd/yyyy' }}</mat-panel-description>
+        </mat-expansion-panel-header>
 
-          <div class="expansion-body">
-            <div>
-              <b
-                ><p>Old data:</p>
-                Title:
-              </b>
-              change.prevTitle <br /><b>Description: </b> change.prevDescription
-            </div>
-            <div>
-              <b
-                ><p>New data:</p>
-                Title: </b
-              >{{ change.title }}<br /><b>Description: </b>{{ change.description }}
-            </div>
+        <div class="expansion-body">
+          <div>
+            <b
+              ><p>Old data:</p>
+              Title:
+            </b>
+            {{ change.prevTitle }} <br /><b>Description: </b> {{ change.prevDescription }}
           </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </ng-container>
+          <div>
+            <b
+              ><p>New data:</p>
+              Title: </b
+            >{{ change.title }}<br /><b>Description: </b>{{ change.description }}
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
   </ng-container>
-  <ng-template #emptyHistory>
-    <div>History is empty</div>
-  </ng-template>
 </ng-container>
+<ng-template #emptyHistory>
+  <div>History is empty</div>
+</ng-template>

@@ -7,6 +7,7 @@ router.get("/", (req, res, next) => {
       res.data = data;
       res.json(res.data);
     } else {
+      console.error(err)
       res.status(500);
       res.end();
     }
@@ -19,6 +20,7 @@ router.get("/:id", (req, res) => {
       res.data = data;
       res.json(res.data);
     } else {
+      console.error(err)
       res.status(404);
       res.end();
     }
@@ -28,8 +30,10 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   recipeService.create(req.body, res, (err, data) => {
     if (!err) {
-      res.sendStatus(201);
+      res.status(201);
+      res.json();
     } else {
+      console.error(err)
       res.status(500);
       res.end();
     }
@@ -39,8 +43,10 @@ router.post("/", (req, res) => {
 router.put("/:id", (req, res) => {
   recipeService.update(req.params.id, req.body, res, (err, data) => {
     if (!err) {
-      res.sendStatus(204);
+      res.status(204);
+      res.json();
     } else {
+      console.error(err)
       res.status(500);
       res.end();
     }
@@ -50,8 +56,10 @@ router.put("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   recipeService.deleteOne(req.params.id, res, (err, data) => {
     if (!err) {
-      res.sendStatus(204);
+      res.status(204);
+      res.json();
     } else {
+      console.error(err)
       res.status(500);
       res.end();
     }

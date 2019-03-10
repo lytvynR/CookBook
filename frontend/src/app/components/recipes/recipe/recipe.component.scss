@@ -1,5 +1,6 @@
 .recipe-card {
   min-width: 300px;
+  width: 300px;
   min-height: 350px;
   padding: 20px 10px;
   margin: 10px;
@@ -9,7 +10,16 @@
 }
 
 .recipe-card-content {
-  height: 200px;
+  height: 190px;
   max-width: 300px;
   overflow: hidden;
+}
+
+mat-card-header {
+  overflow: hidden;
+  height: 105px;
+}
+
+p {
+  text-indent: 20px;
 }

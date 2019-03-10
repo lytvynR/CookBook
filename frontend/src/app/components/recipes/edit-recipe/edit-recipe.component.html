@@ -4,19 +4,13 @@
       <mat-form-field>
         <input matInput type="text" placeholder="Title" [formControlName]="recipeProps.title" />
       </mat-form-field>
-      <!-- <mat-form-field>
-        <input matInput type="text" placeholder="Description" [formControlName]="recipeProps.description" />
-      </mat-form-field> -->
       <mat-form-field>
-          <textarea matInput cols="50" rows="15" placeholder="Description" [formControlName]="recipeProps.description"></textarea>
+        <textarea matInput cols="50" rows="15" placeholder="Description" [formControlName]="recipeProps.description"></textarea>
       </mat-form-field>
       <div class="card-footer-with-buttons">
-        <button mat-raised-button color="primary" (click)="submit()" [disabled]="!editRecipeForm.valid">
-          Save
-        </button>
-        <button mat-raised-button color="link" (click)="goBack()">
-          Back
-        </button>
+        <button mat-raised-button color="primary" (click)="submit()" [disabled]="!editRecipeForm.valid">Save</button>
+        <button mat-raised-button color="warn" (click)="delete()" *ngIf="!isNew">Delete</button>
+        <button mat-raised-button color="link" (click)="goBack()">Back</button>
       </div>
     </form>
   </mat-card>

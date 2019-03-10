@@ -7,6 +7,8 @@ import { Recipe, recipeProps } from 'src/app/models/recipe';
 import { apiPathConstants } from 'src/app/shared/constants/api-path-constants';
 import { FormsControlGroup } from 'src/app/shared/forms/form-control-group';
 import { routeConstants } from 'src/app/routes/route-constants';
+import { DialogService } from 'src/app/shared/services/dialog.service';
+import { messageConstants } from 'src/app/shared/constants/message-constants';
 
 @Component({
   selector: 'app-edit-recipe',
@@ -20,7 +22,7 @@ export class EditRecipeComponent extends BaseComponent implements OnInit {
     modifiedDate: '',
     title: '',
     description: '',
-    previousVersions: []
+    previousVersions: [],
   };
 
   recipeProps = recipeProps;
@@ -28,7 +30,12 @@ export class EditRecipeComponent extends BaseComponent implements OnInit {
   isNew: boolean;
   editRecipeForm: FormGroup;
 
-  constructor(injector: Injector, private apiClientService: ApiClientService, private activatedRoute: ActivatedRoute) {
+  constructor(
+    injector: Injector,
+    private apiClientService: ApiClientService,
+    private activatedRoute: ActivatedRoute,
+    private dialogService: DialogService
+  ) {
     super(injector);
   }
 
@@ -63,6 +70,16 @@ export class EditRecipeComponent extends BaseComponent implements OnInit {
     this.back();
   }
 
+  delete() {
+    this.dialogService.openDialog(messageConstants.deleteConfirmation).subscribe(isOk => {
+      if (isOk) {
+        this.apiClientService.delete(apiPathConstants.recipe + '/' + this.recipe.id).subscribe(() => {
+          this.back();
+        });
+      }
+    });
+  }
+
   private createRecipe(recipe: Recipe) {
     this.apiClientService.post(apiPathConstants.recipes, recipe).subscribe(() => {
       this.navigate(routeConstants.recipes);
@@ -70,7 +87,7 @@ export class EditRecipeComponent extends BaseComponent implements OnInit {
   }
 
   private updateRecipe(recipe: Recipe) {
-    this.apiClientService.put(apiPathConstants.recipes, recipe).subscribe(() => {
+    this.apiClientService.put(apiPathConstants.recipes + '/' + this.recipe.id, recipe).subscribe(() => {
       this.navigate(routeConstants.recipes);
     });
   }

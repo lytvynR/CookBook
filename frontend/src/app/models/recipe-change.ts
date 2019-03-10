@@ -1,6 +1,4 @@
-export interface ComparableRecipeChange {
-  id: string;
-  recipeId: string;
+export interface RecipeChange {
   modifiedDate: string;
   title: string;
   prevTitle: string;
@@ -9,9 +7,9 @@ export interface ComparableRecipeChange {
 }
 
 export const comparableRecipeChangeProps = {
-  id: 'id',
-  recipeId: 'recipeId',
   modifiedDate: 'modifiedDate',
   title: 'title',
-  description: 'description'
+  prevTitle: 'prevTitle',
+  description: 'description',
+  prevDescription: 'prevDescription'
 };

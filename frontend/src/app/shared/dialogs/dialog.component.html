@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>{{ message }}</h1>
+<div class="card-footer-with-buttons">
+  <button mat-raised-button [id]="'yes'" color="primary" class="mr-4" mat-dialog-close="true">Yes</button>
+  <button mat-raised-button [id]="'no'" color="basic" class="mr-4" (click)="onNoClick()">No</button>
+</div>
+
