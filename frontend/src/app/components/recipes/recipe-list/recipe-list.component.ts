@@ -1,9 +1,8 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/base-component/base-component';
-import { ApiClientService } from 'src/app/shared/services/api-client.service';
 import { Recipe, recipeProps } from 'src/app/models/recipe';
-import { apiPathConstants } from 'src/app/shared/constants/api-path-constants';
 import { routeConstants } from 'src/app/routes/route-constants';
+import { RecipeService } from 'src/app/shared/services/recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -14,12 +13,12 @@ export class RecipeListComponent extends BaseComponent implements OnInit {
   recipes: Recipe[] = [];
   recipeProps = recipeProps;
 
-  constructor(injector: Injector, private apiClientService: ApiClientService) {
+  constructor(injector: Injector, private recipeService: RecipeService) {
     super(injector);
   }
 
   ngOnInit() {
-    this.apiClientService.get<Recipe[]>(apiPathConstants.recipes).subscribe(res => {
+    this.recipeService.getAllRecipes().subscribe(res => {
       this.recipes = res;
     });
   }

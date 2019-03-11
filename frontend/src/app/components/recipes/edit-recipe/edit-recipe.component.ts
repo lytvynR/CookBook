@@ -4,11 +4,11 @@ import { ApiClientService } from 'src/app/shared/services/api-client.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Recipe, recipeProps } from 'src/app/models/recipe';
-import { apiPathConstants } from 'src/app/shared/constants/api-path-constants';
 import { FormsControlGroup } from 'src/app/shared/forms/form-control-group';
 import { routeConstants } from 'src/app/routes/route-constants';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { messageConstants } from 'src/app/shared/constants/message-constants';
+import { RecipeService } from 'src/app/shared/services/recipe.service';
 
 @Component({
   selector: 'app-edit-recipe',
@@ -32,9 +32,9 @@ export class EditRecipeComponent extends BaseComponent implements OnInit {
 
   constructor(
     injector: Injector,
-    private apiClientService: ApiClientService,
     private activatedRoute: ActivatedRoute,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private recipeService: RecipeService
   ) {
     super(injector);
   }
@@ -44,7 +44,7 @@ export class EditRecipeComponent extends BaseComponent implements OnInit {
     this.isNew = !this.currentRecipeId;
 
     if (!this.isNew) {
-      this.apiClientService.get<Recipe>(apiPathConstants.recipe + this.currentRecipeId).subscribe(recipeResponse => {
+      this.recipeService.getOneRecipe(this.currentRecipeId).subscribe(recipeResponse => {
         this.recipe = recipeResponse;
         this.editRecipeForm = this.createEditRecipeForm(this.recipe);
       });
@@ -73,7 +73,7 @@ export class EditRecipeComponent extends BaseComponent implements OnInit {
   delete() {
     this.dialogService.openDialog(messageConstants.deleteConfirmation).subscribe(isOk => {
       if (isOk) {
-        this.apiClientService.delete(apiPathConstants.recipe + '/' + this.recipe.id).subscribe(() => {
+        this.recipeService.deleteRecipe(this.recipe.id).subscribe(() => {
           this.back();
         });
       }
@@ -81,13 +81,13 @@ export class EditRecipeComponent extends BaseComponent implements OnInit {
   }
 
   private createRecipe(recipe: Recipe) {
-    this.apiClientService.post(apiPathConstants.recipes, recipe).subscribe(() => {
+    this.recipeService.createRecipe(recipe).subscribe(() => {
       this.navigate(routeConstants.recipes);
     });
   }
 
   private updateRecipe(recipe: Recipe) {
-    this.apiClientService.put(apiPathConstants.recipes + '/' + this.recipe.id, recipe).subscribe(() => {
+    this.recipeService.updateRecipe(recipe).subscribe(() => {
       this.navigate(routeConstants.recipes);
     });
   }

@@ -1,52 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiClientService } from 'src/app/shared/services/api-client.service';
 import { RecipeChange } from 'src/app/models/recipe-change';
 import { Recipe } from 'src/app/models/recipe';
-import { apiPathConstants } from 'src/app/shared/constants/api-path-constants';
+import { RecipeVersion } from 'src/app/models/recipe-version';
+import { RecipeService } from 'src/app/shared/services/recipe.service';
+import { BaseComponent } from 'src/app/shared/base-component/base-component';
 
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.scss'],
 })
-export class HistoryComponent implements OnInit {
-  currentRecipeId: string;
+export class HistoryComponent extends BaseComponent implements OnInit {
   recipeChanges: RecipeChange[] = [];
 
   private recipe: Recipe;
+  private currentRecipeId: string;
 
-  constructor(private activatedRoute: ActivatedRoute, private apiClientService: ApiClientService) {}
+  constructor(injector: Injector, private activatedRoute: ActivatedRoute, private recipeService: RecipeService) {
+    super(injector);
+  }
 
   ngOnInit() {
     this.currentRecipeId = this.activatedRoute.snapshot.queryParams.recipeId;
-    this.apiClientService.get<Recipe>(apiPathConstants.recipe + this.currentRecipeId).subscribe(recipe => {
+
+    this.recipeService.getOneRecipe(this.currentRecipeId).subscribe(recipe => {
       this.recipe = recipe;
-      this.recipeChanges = this.buildFullRecipeHistory(this.recipe);
+      this.recipeChanges = this.buildFullRecipeHistory(this.recipe.previousVersions);
     });
   }
 
-  private buildFullRecipeHistory(recipe: Recipe) {
-    let changes: RecipeChange[] = [];
-    let versions = recipe.previousVersions;
-
-    for (let i = 0; i < versions.length; i++) {
-      let recipeChange: RecipeChange = {
-        modifiedDate: versions[i].modifiedDate,
-        description: versions[i].description,
-        prevDescription: '',
-        title: versions[i].title,
-        prevTitle: '',
-      };
-
-      if (i !== 0) {
-        recipeChange.prevDescription = versions[i - 1].description;
-        recipeChange.prevTitle = versions[i - 1].title;
-      }
-
-      changes.push(recipeChange);
-    }
-
-    return changes.reverse();
+  private buildFullRecipeHistory(versions: RecipeVersion[]): RecipeChange[] {
+    return versions
+      .map((version, i) =>
+        Object.assign({}, version, {
+          prevDescription: i > 0 ? versions[i - 1].description : '',
+          prevTitle: i > 0 ? versions[i - 1].title : '',
+        })
+      )
+      .sort((a, b) => {
+        return new Date(b.modifiedDate).getTime() - new Date(a.modifiedDate).getTime();
+      });
   }
 }

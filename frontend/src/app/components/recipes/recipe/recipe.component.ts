@@ -15,6 +15,8 @@ export class RecipeComponent extends BaseComponent implements OnInit {
     super(injector);
   }
 
+  ngOnInit() {}
+
   editRecipe(recipeId: string) {
     this.navigate(routeConstants.editRecipe, recipeId);
   }
@@ -22,6 +24,4 @@ export class RecipeComponent extends BaseComponent implements OnInit {
   goToRecipeHistory(recipeId: string) {
     this.navigateWithQueryParams(routeConstants.recipeHistory, { queryParams: { recipeId } });
   }
-
-  ngOnInit() {}
 }
